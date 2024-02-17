@@ -8,7 +8,3 @@ This team should find an efficent and well suited AI large language model that i
 2. Have model process block of text and find free food events on campus
 3. Store the results for the application
 
-## After
-
-1. Model -
-2. How - 
