@@ -7,6 +7,4 @@ This team needs to create a front-end user interface. The application should be 
 1. Integrate AI teams code and AI API into application
 2. Build application
 
-## After
 
-1. How? -
