@@ -1,9 +1,7 @@
-from openai import Client 
 from openai import OpenAI
 import PyPDF2
-import openai
 
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = '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'
 
 # Initialize OpenAI client with API key
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -27,7 +25,7 @@ def read_pdf(pdf_path):
     
     return text
 
-pdf_path = "/Users/nathanaelgospodinov/Downloads/Untitled document (4).pdf"
+pdf_path = "/Users/nathanaelgospodinov/Downloads/lard.pdf"
 
 text = read_pdf(pdf_path)
 
@@ -43,7 +41,7 @@ response = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
         {"role": "user", "content": text},
-        {"role": "user", "content": "If there is an event talking about free food return the date, time and location of the event. If there is nothing related to free food, PLEASE ouput this ' '  and nothing else  "}
+        {"role": "user", "content": "If there is an event talking about free food return that there will be free food, the type of food, date, time and location of the event. Keep the details very concise, only ouput what is asked, if one of the items is not present in file ouput unknown. Else output 'No free food events'"},
     ]
 )
 
