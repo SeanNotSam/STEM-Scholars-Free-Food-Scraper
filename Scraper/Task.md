@@ -6,8 +6,5 @@ This team should create a scrpaer program that is able to individually go throug
 ### Tasks
 1. Create scraper for emails.
 
-## After
 
-1. Packages used -
-2. How? -
 
