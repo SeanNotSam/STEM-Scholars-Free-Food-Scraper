@@ -1,22 +1,23 @@
 from openai import OpenAI
 from KeyHackAi import OPENAI_API_KEY
+import PyPDF2
 
 
 # Initialize OpenAI client with API key
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 # Define a function to read the content of a text file
-def read_text(text_path):
-    # Open the text file in read mode
-    with open(text_path, 'r') as file:
-        # Read the entire content of the file
-        text = file.read()
-    
+def extract_text_from_pdf(pdf_path):
+    text = ""
+    with open(pdf_path, "rb") as file:
+        reader = PyPDF2.PdfReader(file)
+        for page in reader.pages:
+            text += page.extract_text()   # Add a line break after each page
     return text
 
 # Path to the text file
-text_path = '/Users/nathanaelgospodinov/Library/Mobile Documents/com~apple~TextEdit/Documents/testFood.txt'  
-text = read_text(text_path)
+pdf_path = '/Users/nathanaelgospodinov/Downloads/Untitled document (4).pdf'  
+text = extract_text_from_pdf(pdf_path)
 
 # Path to your PDF file
 
