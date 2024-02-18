@@ -9,6 +9,4 @@ pip install selenium
 
 brew install chromedriver --cask
 
-pip install pyautogui
-
 pip install openai
