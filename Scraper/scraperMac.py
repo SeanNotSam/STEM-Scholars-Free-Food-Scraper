@@ -88,3 +88,6 @@ with open('email_subjects.txt', 'a') as file:
         mail.click()
         webdriver.ActionChains(driver).send_keys(Keys.DOWN).perform()
         mail = driver.switch_to.active_element
+
+    with open('hackAI.py', 'r') as file:
+        exec(file.read())
