@@ -20,7 +20,7 @@ completion =  client.chat.completions.create(
 )
 
 # Path to the output text file
-fileOutput = "free_food_and_dominos_coupons.txt"
+fileOutput = 'scraperMac.py'
 
 # Open the file in write mode
 with open(fileOutput, "w") as file:
