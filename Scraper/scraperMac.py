@@ -14,9 +14,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 CHROME_WINDOW_SIZE = "1920,1080"
 DOWNLOAD_DIR = r"/Users/seanbrod16/Downloads/data"
 ELEMENT_LOAD_WAIT_SEC = 30
-DELAY_SEC = 2
+DELAY_SEC = 1
 DELAY_SEC1 = 6
-MAIL_BOX = "broderick.81@buckeyemail.osu.edu"
+MAIL_BOX = "ARB"
 FULL_DATE_PATTERN = r'(\d{4})-(\d{1,2})-(\d{1,2})'
 STOP_DATE = "2024-2-14"
 
@@ -24,7 +24,7 @@ def preprocess_element_class(x: str):
     return x.replace(" ", ".")
 
 if __name__ == "__main__":
-    with open('authen.json') as json_file:
+    with open('scraper/authen.json') as json_file:
         authen = json.load(json_file)
 
     chrome_options = Options()
@@ -75,18 +75,6 @@ with open('email_subjects.txt', 'a') as file:
 
         time.sleep(DELAY_SEC)
 
-        # Instead of downloading, use cmd+p or ctrl+p to open the print dialog
-        # For macOS, use Keys.COMMAND. For Windows/Linux, use Keys.CONTROL
-        #webdriver.ActionChains(driver).key_down(Keys.COMMAND).send_keys('p').key_up(Keys.COMMAND).perform()
-        #time.sleep(DELAY_SEC-1)
-        #webdriver.ActionChains(driver).key_down(Keys.COMMAND).send_keys('p').key_up(Keys.COMMAND).perform()
-        #time.sleep(DELAY_SEC-1)
-
-        # Use PyAutoGUI to press Enter
-        #pyautogui.press('enter')
-        #time.sleep(DELAY_SEC-1)
-        #pyautogui.press('enter')
-
         aria_label = mail.get_attribute('aria-label')
         if aria_label is not None:
             file.write(aria_label)
@@ -94,7 +82,7 @@ with open('email_subjects.txt', 'a') as file:
         
         time.sleep(DELAY_SEC)
 
-        # Return to the email list
+        #return 
         webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
         time.sleep(DELAY_SEC)
