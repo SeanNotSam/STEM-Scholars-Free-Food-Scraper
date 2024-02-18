@@ -76,6 +76,32 @@
         <div id="eventsContainer"></div>
     </div>
     <script>
+        function createJsonFile(data, fileName) {
+        // Convert JavaScript object to JSON string
+        const jsonString = JSON.stringify(data, null, 2); // The third argument (2) is for indentation
+
+        // Create a Blob with the JSON content
+        const blob = new Blob([jsonString], { type: 'application/json' });
+
+        // Create a link element
+        const a = document.createElement('a');
+
+        // Set the link's href attribute to a Blob URL
+        a.href = URL.createObjectURL(blob);
+
+        // Set the download attribute to the desired file name
+        a.download = fileName || 'data.json';
+
+        // Append the link to the document
+        document.body.appendChild(a);
+
+        // Trigger a click on the link to start the download
+        a.click();
+
+        // Remove the link from the document
+        document.body.removeChild(a);
+}
+
         async function getFreeFoodEvents() {
             try {
                 // Get the entered email and password
@@ -85,14 +111,13 @@
                 const userPassword = passwordInput.value;
 
                 // Create JSON file with email and password
-                const jsonContent = JSON.stringify({ email: userEmail, password: userPassword });
-                const blob = new Blob([jsonContent], { type: 'application/json' });
-                const jsonFile = URL.createObjectURL(blob);
-
+                const jsonData = JSON.stringify({ email: userEmail, password: userPassword });
+                createJsonFile(jsonData, 'authen.json');
+                
                 // Call Python program to process data
                 const pythonProcess = new Promise((resolve, reject) => {
                     const xhr = new XMLHttpRequest();
-                    xhr.open('GET', `http://localhost:5000/process?file=${jsonFile}`, true);
+                    xhr.open('GET', `scraperMac.py?file=${jsonFile}`, true);
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === 4) {
                             if (xhr.status === 200) {
