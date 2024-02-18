@@ -5,8 +5,8 @@ Set up for Outlook mail:
 -Date format
 -2023-09-01
 
-pip install selenium
-
 brew install chromedriver --cask
+
+pip install selenium
 
 pip install openai
