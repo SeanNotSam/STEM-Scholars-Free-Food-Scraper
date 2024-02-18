@@ -1,33 +1,22 @@
 from openai import OpenAI
-import PyPDF2
+from KeyHackAi import OPENAI_API_KEY
 
-OPENAI_API_KEY = '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'
 
 # Initialize OpenAI client with API key
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-
-            
-def read_pdf(pdf_path):
-    # Open the PDF file in binary mode
-    with open(pdf_path, 'rb') as file:
-        # Create a PDF reader object
-        reader = PyPDF2.PdfReader(file)
-        
-        # Initialize an empty string to store the extracted text
-        text = ''
-        
-        # Iterate through each page of the PDF
-        for page_num in range(len(reader.pages)):
-            # Extract text from the current page
-            page = reader.pages[page_num]
-            text += page.extract_text()
+# Define a function to read the content of a text file
+def read_text(text_path):
+    # Open the text file in read mode
+    with open(text_path, 'r') as file:
+        # Read the entire content of the file
+        text = file.read()
     
     return text
 
-pdf_path = "/Users/nathanaelgospodinov/Downloads/lard.pdf"
-
-text = read_pdf(pdf_path)
+# Path to the text file
+text_path = '/Users/nathanaelgospodinov/Library/Mobile Documents/com~apple~TextEdit/Documents/testFood.txt'  
+text = read_text(text_path)
 
 # Path to your PDF file
 
@@ -37,11 +26,12 @@ text = read_pdf(pdf_path)
 # Now you can use the extracted text as input for GPT-3
 # For example:
 
+# Define the input text
 response = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
         {"role": "user", "content": text},
-        {"role": "user", "content": "If there is an event talking about free food return that there will be free food, the type of food, date, time and location of the event. Keep the details very concise, only ouput what is asked, if one of the items is not present in file ouput unknown. Else output 'No free food events'"},
+        {"role": "user", "content": "If there is an event talking about free food return that there will be 'free food: yes', the type of food (if applicable) , date (if applicable) , time (if applicable) and location (if applicable) of the event. Keep the details very concise, only ouput what is asked. Else if there is not free food event found output 'No free food event'"},
     ]
 )
 
