@@ -12,3 +12,5 @@ brew install chromedriver --cask
 pip install pyautogui
 
 pip install openai
+
+node.js 
